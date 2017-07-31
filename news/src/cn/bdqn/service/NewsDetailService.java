@@ -1,5 +1,6 @@
 package cn.bdqn.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cn.bdqn.bean.News_Detail;
@@ -16,4 +17,20 @@ public interface NewsDetailService {
 	 * @return   是否成功
 	 */
 	int DelByNewsDetailId(int id);
+
+	/**
+	 * 
+	 * @param id  查询详情的id
+	 * @return    一条新闻详情
+	 */
+	News_Detail findById(Serializable id);
+
+	/**
+	 * 
+	 * @param id  根据id 修改指定新闻的新闻
+	 * @return  是否修改成功
+	 */
+
+	boolean updateById(News_Detail detail);
+
 }

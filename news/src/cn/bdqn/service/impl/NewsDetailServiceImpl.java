@@ -1,5 +1,6 @@
 package cn.bdqn.service.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cn.bdqn.bean.News_Detail;
@@ -19,6 +20,19 @@ public class NewsDetailServiceImpl implements NewsDetailService {
 	@Override
 	public int DelByNewsDetailId(int id) {
 		return dao.DelByNewsDetailId(id);
+	}
+
+	@Override
+	public News_Detail findById(Serializable id) {
+		return dao.findById(id);
+	}
+
+	@Override
+	public boolean updateById(News_Detail detail) {
+		if (dao.updateById(detail) > 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

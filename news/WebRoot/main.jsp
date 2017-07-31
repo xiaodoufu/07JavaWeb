@@ -98,7 +98,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<i class="icon-zoom-in icon-white"></i>  
 										详情                                           
 									</a>
-									<a class="btn btn-info" href="#">
+									<!-- findById.jsp  根据id 查询指定新闻的详情 -->
+									<a class="btn btn-info" href="update.jsp?id=<%=detail.getId() %>">
 										<i class="icon-edit icon-white"></i>  
 										修改                                            
 									</a>
@@ -131,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="modal-footer">
 			<!-- 隐藏域  -->
-			   <input  type="hidden"  id="url">
+			   <input  type="hidden" id="url">
 				<a href="#" class="btn" data-dismiss="modal">取消</a>
 				<a href="#" onClick="delSubmit()" class="btn btn-primary">删除</a>
 			</div>
@@ -217,7 +218,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	     function  del(delUrl){
 	     //给隐藏域赋值
 	     $("#url").val(delUrl);
-        $("#myModal").modal("show");	     
+         $("#myModal").modal("show");	     
 	     }
 	  
 	  

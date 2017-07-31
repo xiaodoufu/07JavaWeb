@@ -25,7 +25,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  
+  <!--
+   当前页面的作用
+   01.获取上一个页面的请求
+   02.调用service代码
+   03.拿到结果 返回界面
+    -->
 <%
   //获取请求中的id
  String id=  request.getParameter("id");
@@ -35,7 +40,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  int  num = Integer.parseInt(id);
   num=service.DelByNewsDetailId(num);
    if(num>0){
-     out.print("删除成功");
+     //重定向到main.jsp
+         response.sendRedirect("main.jsp");
    }else{
      out.print("删除失败");
    }
