@@ -58,7 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="alert alert-info">
 						请输入您的用户名和密码.......
 					</div>
-					<form class="form-horizontal" action="doLogin.jsp" method="post">
+					<!--login 是web.xml文件中  servlet-mapping中的url-parttern  -->
+					<form class="form-horizontal" action="login" method="post">
 						<fieldset>
 							<div class="input-prepend" title="Username" data-rel="tooltip">
 								<span class="add-on"><i class="icon-user"></i></span><input autofocus class="input-large span10" name="username" id="username" type="text" value="admin" />

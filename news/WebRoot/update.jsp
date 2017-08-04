@@ -49,14 +49,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="shortcut icon" href="img/favicon.ico">
   
   <body>
-     <%
-     NewsDetailService service=new NewsDetailServiceImpl();
-     
-       //获取a标签传递过来的 id
-      String  id=    request.getParameter("id");
-      News_Detail  detail=service.findById(id);
-    %>
-  
   
 <div class="row-fluid sortable">
 				<div class="box span12">
@@ -69,24 +61,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 					<div class="box-content">
-						<form  action="doUpdate.jsp?id=<%=detail.getId() %>"    method="post" class="form-horizontal">
+						<form  action="updateServlet?id=${detail.id }"    method="post" class="form-horizontal">
 						  <fieldset>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">新闻标题 </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead" name="title"  value="<%=detail.getTitle()%>">
+								<input type="text" class="span6 typeahead" name="title"  value="${detail.getTitle()}">
 							  </div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">新闻作者 </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead"  name="author"  value="<%=detail.getAuthor()%>">
+								<input type="text" class="span6 typeahead"  name="author"  value="${detail.getAuthor()}">
 							  </div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">新闻摘要 </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead"  name="summary"  value="<%=detail.getSummary()%>">
+								<input type="text" class="span6 typeahead"  name="summary"  value="${detail.getSummary()}">
 							  </div>
 							</div>
 							<div class="control-group">
@@ -107,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <div class="controls">
 								<textarea class="cleditor" id="textarea2" rows="3" name="content">
 								  <!-- 新闻内容 -->
-								  <%=detail.getContent()%>
+								  ${detail.getContent()}
 								</textarea>
 							  </div>
 							</div>

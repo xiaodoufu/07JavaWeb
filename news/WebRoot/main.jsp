@@ -1,13 +1,11 @@
-<%@page import="cn.bdqn.bean.News_Detail"%>
-<%@page import="cn.bdqn.service.impl.NewsDetailServiceImpl"%>
-<%@page import="cn.bdqn.service.NewsDetailService"%>
-<%@page import="cn.bdqn.bean.News_User"%>
+
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<!--  引入jstl标签库-->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -59,7 +57,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="row-fluid sortable">		
 				<div class="box span12">
 					<div class="box-header well" data-original-title>
-						<h2><i class="icon-user"></i> <%=((News_User)session.getAttribute("user")).getUserName() %></h2>
+					<!-- 因为在loginServlet中我们的登录用户信息，已经放在了session作用域中  -->
+						<h2><i class="icon-user"></i>${sessionScope.loginUser.userName}</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
 							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -79,40 +78,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </tr>
 						  </thead>   
 						  <tbody>
-	<%
-	  //调用service层获取所有新闻列表的方法
-	  NewsDetailService  service=new NewsDetailServiceImpl();
-	  List<News_Detail>   details= service.findAllNewsDetail();
-	  
-	  //循环 把所有的新闻信息 输出到 界面中
-	  for(News_Detail  detail:details){
-	 %>					
+						  <!-- begin  forEach  -->
+				<c:forEach items="${details}" var="d">	  
 							<tr>
-								<td><%=detail.getId() %></td>
-								<td class="center"><%=detail.getTitle() %></td>
-								<td class="center"><%=detail.getAuthor() %></td>
-								<td class="center"><%=detail.getSummary() %></td>
-								<td class="center"><%=detail.getCreateDate() %></td>
+								<td>${d.id}</td>
+								<td class="center">${d.title }</td>
+								<td class="center">${d.author }</td>
+								<td class="center">${d.summary }</td>
+								<td class="center">${d.createDate }</td>
 								<td class="center">
 									<a class="btn btn-success" href="#">
 										<i class="icon-zoom-in icon-white"></i>  
 										详情                                           
 									</a>
 									<!-- findById.jsp  根据id 查询指定新闻的详情 -->
-									<a class="btn btn-info" href="update.jsp?id=<%=detail.getId() %>">
+									<a class="btn btn-info" href="findByIdServlet?id=${d.id }">
 										<i class="icon-edit icon-white"></i>  
 										修改                                            
 									</a>
-									<a class="btn btn-danger" href="#" onClick="del('doDel.jsp?id=<%=detail.getId() %>');">
+									<a class="btn btn-danger" href="#" onClick="del('delServlet?id=${d.id }');">
 										<i class="icon-trash icon-white"></i> 
 										删除
 									</a>
 								</td>
 							</tr>
-						
-						<%
-						}
-						 %>	
+						</c:forEach>	
+						<!-- end  forEach-->	
 						  </tbody>
 					  </table>            
 					</div>
