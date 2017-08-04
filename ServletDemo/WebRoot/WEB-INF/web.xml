@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<!--  设置全局的初始化参数  -->
+	<context-param>
+	  <param-name>userName</param-name>
+	  <param-value>我是全局的参数！</param-value>
+	</context-param>
+	
+	<!-- 配置我们创建的servlet  -->
+	<servlet>
+	  <servlet-name>s</servlet-name>
+	  <servlet-class>cn.bdqn.servlet.MyServlet</servlet-class>
+	   <!-- 设置servlet初始化参数  仅限于当前servlet
+	    <init-param>
+	       <param-name>userName</param-name>
+	       <param-value>哈哈！</param-value>
+	    </init-param>  -->
+	     <!-- 在服务器启动的时候 实例化servlet  放置在servlet节点的最后 -->
+	   <load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<!-- 用户访问的名称 -->
+	<servlet-mapping>
+	   <servlet-name>s</servlet-name>
+	   <url-pattern>/MyServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	  <servlet-name>s2</servlet-name>
+	  <servlet-class>cn.bdqn.servlet.MyServlet2</servlet-class>
+	     <!-- 在服务器启动的时候 实例化servlet  放置在servlet节点的最后 -->
+	   <load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<!-- 用户访问的名称 -->
+	<servlet-mapping>
+	   <servlet-name>s2</servlet-name>
+	   <url-pattern>/MyServlet2</url-pattern>
+	</servlet-mapping>
+	
+	
+<!-- 
+01.用户在浏览器的地址栏中输入 localhost:8080/ServletDemo/MyServlet
+02.用/MyServlet去web.xml文件中查询有没有对应的url-pattern
+03.如果没找到，出现404!找到了之后通过mapping节点中的servlet-name查询对应的servlet节点下的servlet-name
+04.匹配后进去servlet-name对应的servlet-class，执行一系列操作
+
+
+url的匹配规则：
+  01.精确匹配    /MyServlet
+  02.全局匹配    /*
+  03.后缀匹配    *.do
+  04.目录匹配   /user/login   
+   这些规则可以 联合使用！
+ -->
+	
+	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   //获取login页面用户输入的用户名和密码
  String userName= request.getParameter("username");
  String password= request.getParameter("password");
-      UserService service=new UserServiceImpl();
+  UserService service=new UserServiceImpl();
    News_User  user=  service.loginUser(userName, password);
   
   //判断用户是否为空
@@ -42,12 +42,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      response.sendRedirect("main.jsp");  //重定向main.jsp
   }
    %>
-  
-  
-  
-  
-  
-  
   
   
   </body>

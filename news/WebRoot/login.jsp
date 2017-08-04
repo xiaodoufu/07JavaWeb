@@ -44,7 +44,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="shortcut icon" href="img/favicon.ico">
 		
 </head>
-  
   <body>
   <div class="container-fluid">
 		<div class="row-fluid">
