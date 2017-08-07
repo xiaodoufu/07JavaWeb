@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bdqn.bean.News_Category;
 import cn.bdqn.bean.News_Detail;
 import cn.bdqn.dao.NewsDetailDao;
 import cn.bdqn.util.BaseDao;
@@ -79,10 +80,44 @@ public class NewsDetailDaoImpl extends BaseDao implements NewsDetailDao {
 	@Override
 	public int updateById(News_Detail detail) {
 
-		String sql = " UPDATE   news_detail  SET title=?,content=?,author=?,summary=?   WHERE id=?";
-		Object[] params = { detail.getTitle(), detail.getContent(),
-				detail.getAuthor(), detail.getSummary(), detail.getId() };
+		String sql = " UPDATE   news_detail  SET categoryId=?, title=?,content=?,author=?,summary=?   WHERE id=?";
+		Object[] params = { detail.getCategoryId(), detail.getTitle(),
+				detail.getContent(), detail.getAuthor(), detail.getSummary(),
+				detail.getId() };
 
+		return executeUpdate(sql, params);
+	}
+
+	@Override
+	public List<News_Category> findCategorys() {
+		String sql = "select * from news_category";
+		rs = executeQuery(sql);
+		List<News_Category> list = new ArrayList<News_Category>();
+
+		try {
+			while (rs.next()) {
+				News_Category c = new News_Category();
+				c.setId(rs.getInt("id"));
+				c.setName(rs.getString("name"));
+				// 将每一个新闻类型的对象 放入到集合中
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+
+		return list;
+	}
+
+	@Override
+	public int add(News_Detail detail) {
+		String sql = "INSERT INTO news_detail (categoryId,title,summary,content,picPath,author,createDate) "
+				+ " values (?,?,?,?,?,?,?)";
+		Object[] params = { detail.getCategoryId(), detail.getTitle(),
+				detail.getSummary(), detail.getContent(), detail.getPicPath(),
+				detail.getAuthor(), detail.getCreateDate() };
 		return executeUpdate(sql, params);
 	}
 }

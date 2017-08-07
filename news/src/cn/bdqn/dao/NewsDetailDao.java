@@ -3,6 +3,7 @@ package cn.bdqn.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import cn.bdqn.bean.News_Category;
 import cn.bdqn.bean.News_Detail;
 
 public interface NewsDetailDao {
@@ -31,5 +32,17 @@ public interface NewsDetailDao {
 	 * @return  是否修改成功
 	 */
 	int updateById(News_Detail detail);
+
+	/**
+	 * @return 所有新闻类型
+	 */
+	List<News_Category> findCategorys();
+
+	/**
+	 *   新增新闻
+	 * @param detail 
+	 * @return
+	 */
+	int add(News_Detail detail);
 
 }

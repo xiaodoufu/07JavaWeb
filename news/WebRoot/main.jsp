@@ -87,9 +87,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td class="center">${d.summary }</td>
 								<td class="center">${d.createDate }</td>
 								<td class="center">
-									<a class="btn btn-success" href="#">
+								<!-- 因为我们直接去界面的话  不能获取 所有的新闻类型 所以 先去servlet中获取  之后再跳转到add.jsp -->
+									<a class="btn btn-success" href="FindCategoryServlet">
 										<i class="icon-zoom-in icon-white"></i>  
-										详情                                           
+										新增                                           
 									</a>
 									<!-- findById.jsp  根据id 查询指定新闻的详情 -->
 									<a class="btn btn-info" href="findByIdServlet?id=${d.id }">

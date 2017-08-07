@@ -3,6 +3,7 @@ package cn.bdqn.service;
 import java.io.Serializable;
 import java.util.List;
 
+import cn.bdqn.bean.News_Category;
 import cn.bdqn.bean.News_Detail;
 
 public interface NewsDetailService {
@@ -32,5 +33,17 @@ public interface NewsDetailService {
 	 */
 
 	boolean updateById(News_Detail detail);
+
+	/**
+	 * @return 所有新闻类型
+	 */
+	List<News_Category> findCategorys();
+
+	/**
+	 *   新增新闻
+	 * @param detail 
+	 * @return
+	 */
+	int add(News_Detail detail);
 
 }

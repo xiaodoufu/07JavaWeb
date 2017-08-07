@@ -52,6 +52,29 @@
 	 <servlet-name>updateServlet</servlet-name>
 	 <url-pattern>/updateServlet</url-pattern>
 	</servlet-mapping>
+	<!-- 06.配置查询所有的新闻类型  -->
+	<servlet>
+	 <servlet-name>FindCategoryServlet</servlet-name>
+	 <servlet-class>cn.bdqn.servlet.FindCategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	 <servlet-name>FindCategoryServlet</servlet-name>
+	 <url-pattern>/FindCategoryServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 07.配置新增新闻  -->
+	<servlet>
+	 <servlet-name>addServlet</servlet-name>
+	 <servlet-class>cn.bdqn.servlet.AddServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	 <servlet-name>addServlet</servlet-name>
+	 <url-pattern>/addServlet</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
 	
 	
   <welcome-file-list>

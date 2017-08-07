@@ -3,13 +3,14 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
   <head>
     <base href="<%=basePath%>">
     	<meta charset="utf-8">
-	<title>修改新闻页面</title>
+	<title>新增新闻页面</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
 	<meta name="author" content="Muhammad Usman">
@@ -50,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="row-fluid sortable">
 				<div class="box span12">
 					<div class="box-header well" data-original-title>
-						<h2><i class="icon-edit"></i>修改界面</h2>
+						<h2><i class="icon-edit"></i>新增界面</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
 							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -58,68 +59,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 					<div class="box-content">
-						<form  action="updateServlet?id=${detail.id }"    method="post" class="form-horizontal">
+						<form  action="addServlet"  enctype="multipart/form-data"   method="post" class="form-horizontal">
 						  <fieldset>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">新闻标题 </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead" name="title"  value="${detail.getTitle()}">
+								<input type="text" class="span6 typeahead" name="title">
 							  </div>
 							</div>
 							
-							 <div class="control-group">
+							  <div class="control-group">
 								<label class="control-label" for="selectError">新闻类别</label>
 								<div class="controls">
 								  <select id="selectError" data-rel="chosen"  name="categoryId">
-									    <option value="0">请选择类别</option>
-									    <option <c:if test="${detail.categoryId==1}">selected</c:if>  value="1">国内</option>
-									    <option <c:if test="${detail.categoryId==2}">selected</c:if>  value="2">国际</option>
-									    <option <c:if test="${detail.categoryId==3}">selected</c:if>  value="3">娱乐</option>
-									    <option <c:if test="${detail.categoryId==4}">selected</c:if>  value="4">军事</option>
-									    <option <c:if test="${detail.categoryId==5}">selected</c:if>  value="5">财经</option>
-									    <option <c:if test="${detail.categoryId==6}">selected</c:if>  value="6">天气</option>
-									    <option <c:if test="${detail.categoryId==7}">selected</c:if>  value="7">你猜</option>
+									<option  value="0">请选择新闻类别</option>
+									  <c:forEach items="${categorys}" var="c">
+									    <option  value="${c.id}">${c.name}</option>
+									  </c:forEach>
 								  </select>
 								</div>
 							  </div>
 							
-							
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">新闻作者 </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead"  name="author"  value="${detail.getAuthor()}">
+								<input type="text" class="span6 typeahead"  name="author">
 							  </div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">新闻摘要 </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead"  name="summary"  value="${detail.getSummary()}">
+								<input type="text" class="span6 typeahead"  name="summary">
 							  </div>
 							</div>
 							<div class="control-group">
-							  <label class="control-label" for="date01">修改日期</label>
+							  <label class="control-label" for="date01">创建日期</label>
 							  <div class="controls">
-								<input type="text" class="input-xlarge datepicker"  name="modifyDate" value="02/16/12">
+								<input type="text" class="input-xlarge datepicker"  name="createDate" value="02/16/12">
 							  </div>
 							</div>
 
 							<div class="control-group">
 							  <label class="control-label" for="fileInput">文件上传</label>
 							  <div class="controls">
-								<input class="input-file uniform_on" id="fileInput" type="file">
+								<input class="input-file uniform_on"  name="picPath" id="fileInput" type="file">
 							  </div>
 							</div>          
 							<div class="control-group">
 							  <label class="control-label" for="textarea2">新闻内容</label>
 							  <div class="controls">
 								<textarea class="cleditor" id="textarea2" rows="3" name="content">
-								  <!-- 新闻内容 -->
-								  ${detail.getContent()}
 								</textarea>
 							  </div>
 							</div>
 							<div class="form-actions">
-							  <button type="submit" class="btn btn-primary">修改</button>
+							  <button type="submit" class="btn btn-primary">新增</button>
 							  <button type="reset" class="btn">重置</button>
 							</div>
 						  </fieldset>

@@ -38,6 +38,8 @@ public class UpdateServlet extends HttpServlet {
 		detail.setTitle(request.getParameter("title"));
 		detail.setContent(request.getParameter("content"));
 		detail.setSummary(request.getParameter("summary"));
+		detail.setCategoryId(Integer.parseInt(request
+				.getParameter("categoryId")));
 		detail.setId(Integer.parseInt(id));
 		// 获取修改时间
 

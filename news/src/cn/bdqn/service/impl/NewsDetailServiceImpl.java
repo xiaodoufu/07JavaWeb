@@ -3,6 +3,7 @@ package cn.bdqn.service.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import cn.bdqn.bean.News_Category;
 import cn.bdqn.bean.News_Detail;
 import cn.bdqn.dao.NewsDetailDao;
 import cn.bdqn.dao.impl.NewsDetailDaoImpl;
@@ -33,6 +34,16 @@ public class NewsDetailServiceImpl implements NewsDetailService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<News_Category> findCategorys() {
+		return dao.findCategorys();
+	}
+
+	@Override
+	public int add(News_Detail detail) {
+		return dao.add(detail);
 	}
 
 }
