@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   
-  
+  <form action="listServlet"  method="post">
   
   
   <div class="row-fluid sortable">		
@@ -110,6 +110,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 				</div><!--/span-->
 			</div><!--/row-->
+
+
+<!-- 创建分页使用的隐藏域       当前页 -->
+ <input type="hidden" name="pageIndex">
+
+   <nav aria-label="Page navigation">
+	  <ul class="pagination">
+	  
+	  <c:if test="${pageUtil.pageIndex>1}">
+	    <li><a href="javascript:newsPage(document.forms[0],1)">首页</a></li>
+	    <li><a href="javascript:newsPage(document.forms[0],${pageUtil.pageIndex-1})" >上一页</a></li>
+	  </c:if>  
+	  
+	    <c:if test="${pageUtil.pageIndex< pageUtil.pageCount}">
+	    <li><a href="javascript:newsPage(document.forms[0],${pageUtil.pageIndex+1})">下一页</a></li>
+	    <li><a href="javascript:newsPage(document.forms[0],${pageUtil.pageCount})">尾页</a></li>
+	     </c:if>  
+	  </ul>
+  </nav>
+
+
+</form>
+
+
+
 
 
 
@@ -219,6 +244,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   window.location.href= $("#url").val();
 	  }
 	  
+	  //分页的请求
+	  function  newsPage(form,pageIndex){
+	  //获取form表中的name属性值是pageIndex的隐藏域
+	  form.pageIndex.value=pageIndex;
+	  form.submit();  //表单提交
+	  }
 	  
 	  
 	  </script>

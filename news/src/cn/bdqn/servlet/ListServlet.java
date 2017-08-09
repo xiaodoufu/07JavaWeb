@@ -58,6 +58,8 @@ public class ListServlet extends HttpServlet {
 		if (details != null) {
 			// 还是要把集合放进 作用域中 便于前台获取
 			request.setAttribute("details", details);
+			// 把分页的工具类对象页得放进作用域中
+			request.setAttribute("pageUtil", util);
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 		} else {
 			System.out.println("出现异常！");
