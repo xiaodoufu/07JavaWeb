@@ -1,10 +1,14 @@
 package cn.bdqn.util;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class BaseDao {
 
@@ -16,8 +20,8 @@ public class BaseDao {
 	protected ResultSet rs = null;
 
 	/**
-	 * 公共连接数据库的方法
-	 */
+	 * 公共连接数据库的方法      JDBC  API
+	 
 	public boolean getConnection() {
 		try {
 			// 001.加载驱动
@@ -28,6 +32,26 @@ public class BaseDao {
 					ConfigManager.getValue("jdbc.userName"),
 					ConfigManager.getValue("jdbc.password"));
 		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}*/
+
+	/**
+	 * 使用 JNDI  连接池技术 连接数据库
+	 */
+	public boolean getConnection() {
+		try {
+			// 初始化上下文信息 获取服务器
+			Context context = new InitialContext();
+			DataSource source = (DataSource) context
+					.lookup("java:comp/env/jdbc/news");
+			connection = source.getConnection();
+		} catch (NamingException e) {
 			e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
