@@ -9,6 +9,7 @@ import cn.bdqn.bean.News_Category;
 import cn.bdqn.bean.News_Detail;
 import cn.bdqn.dao.NewsDetailDao;
 import cn.bdqn.util.BaseDao;
+import cn.bdqn.util.PageUtil;
 
 public class NewsDetailDaoImpl extends BaseDao implements NewsDetailDao {
 
@@ -119,5 +120,55 @@ public class NewsDetailDaoImpl extends BaseDao implements NewsDetailDao {
 				detail.getSummary(), detail.getContent(), detail.getPicPath(),
 				detail.getAuthor(), detail.getCreateDate() };
 		return executeUpdate(sql, params);
+	}
+
+	@Override
+	public int getTotalCounts() {
+		// String sql = "select  count(1)  as a from news_detail";
+		String sql = "select  count(1)  from news_detail";
+		rs = executeQuery(sql);
+		int totalCounts = 0;
+		try {
+			if (rs.next()) {
+				// totalCounts = rs.getInt("a");
+				totalCounts = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+		return totalCounts;
+	}
+
+	@Override
+	public List<News_Detail> getNewsByPage(PageUtil util) {
+		String sql = "SELECT * FROM news_detail  LIMIT ?,?";
+		Object[] params = { (util.getPageIndex() - 1) * util.getPageSize(),
+				util.getPageSize() };
+		// 分页显示的新闻列表
+		List<News_Detail> list = new ArrayList<News_Detail>();
+		News_Detail detail = null;
+		rs = executeQuery(sql, params);
+		try {
+			while (rs.next()) {
+				detail = new News_Detail();
+				detail.setAuthor(rs.getString("author"));
+				detail.setCategoryId(rs.getInt("categoryId"));
+				detail.setId(rs.getInt("id"));
+				detail.setContent(rs.getString("content"));
+				detail.setSummary(rs.getString("summary"));
+				detail.setCreateDate(rs.getDate("createDate"));
+				detail.setModifyDate(rs.getDate("modifyDate"));
+				detail.setTitle(rs.getString("title"));
+				detail.setPicPath(rs.getString("picPath"));
+				list.add(detail);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+		return list;
 	}
 }

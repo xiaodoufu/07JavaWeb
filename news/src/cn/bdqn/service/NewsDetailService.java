@@ -5,6 +5,7 @@ import java.util.List;
 
 import cn.bdqn.bean.News_Category;
 import cn.bdqn.bean.News_Detail;
+import cn.bdqn.util.PageUtil;
 
 public interface NewsDetailService {
 	/**
@@ -45,5 +46,18 @@ public interface NewsDetailService {
 	 * @return
 	 */
 	int add(News_Detail detail);
+
+	/**
+	 * 
+	 * @return  新闻的总记录数
+	 */
+	int getTotalCounts();
+
+	/**
+	 * 
+	 * @param util   分页的工具类 中 有 当前页 和页大小
+	 * @return   分页显示的新闻列表
+	 */
+	List<News_Detail> getNewsByPage(PageUtil util);
 
 }

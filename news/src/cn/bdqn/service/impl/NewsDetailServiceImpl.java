@@ -8,6 +8,7 @@ import cn.bdqn.bean.News_Detail;
 import cn.bdqn.dao.NewsDetailDao;
 import cn.bdqn.dao.impl.NewsDetailDaoImpl;
 import cn.bdqn.service.NewsDetailService;
+import cn.bdqn.util.PageUtil;
 
 public class NewsDetailServiceImpl implements NewsDetailService {
 
@@ -44,6 +45,16 @@ public class NewsDetailServiceImpl implements NewsDetailService {
 	@Override
 	public int add(News_Detail detail) {
 		return dao.add(detail);
+	}
+
+	@Override
+	public int getTotalCounts() {
+		return dao.getTotalCounts();
+	}
+
+	@Override
+	public List<News_Detail> getNewsByPage(PageUtil util) {
+		return dao.getNewsByPage(util);
 	}
 
 }
