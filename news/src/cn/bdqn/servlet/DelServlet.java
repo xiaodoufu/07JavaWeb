@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.bdqn.service.NewsDetailService;
-import cn.bdqn.service.impl.NewsDetailServiceImpl;
+import cn.bdqn.service.ServiceFactory;
 
 /**
    01.获取上一个页面的请求
@@ -29,10 +29,11 @@ public class DelServlet extends HttpServlet {
 		// 获取请求中的id
 		String id = request.getParameter("id");
 
-		NewsDetailService service = new NewsDetailServiceImpl();
+		NewsDetailService service = (NewsDetailService) ServiceFactory
+				.getServiceImpl("NewsDetailService");
 
 		int num = Integer.parseInt(id);
-		num = service.DelByNewsDetailId(num);
+		num = service.deleteById(id);
 		if (num > 0) {
 			// 重定向到main.jsp????listServlet可以获取新闻信息
 			response.sendRedirect("listServlet");

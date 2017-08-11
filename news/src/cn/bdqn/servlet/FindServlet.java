@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.bdqn.bean.News_Detail;
 import cn.bdqn.service.NewsDetailService;
-import cn.bdqn.service.impl.NewsDetailServiceImpl;
+import cn.bdqn.service.ServiceFactory;
 
 /**
  * 根据id获取指定的新闻信息
@@ -25,7 +25,9 @@ public class FindServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
-		NewsDetailService service = new NewsDetailServiceImpl();
+
+		NewsDetailService service = (NewsDetailService) ServiceFactory
+				.getServiceImpl("NewsDetailService");
 
 		// 获取a标签传递过来的 id
 		String id = request.getParameter("id");

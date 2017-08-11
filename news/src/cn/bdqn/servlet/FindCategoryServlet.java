@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.bdqn.bean.News_Category;
-import cn.bdqn.service.NewsDetailService;
-import cn.bdqn.service.impl.NewsDetailServiceImpl;
+import cn.bdqn.service.CategoryService;
+import cn.bdqn.service.ServiceFactory;
 
 /**
  * 获取所有新闻类型
@@ -26,8 +26,9 @@ public class FindCategoryServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		NewsDetailService service = new NewsDetailServiceImpl();
-		List<News_Category> list = service.findCategorys();
+		CategoryService service = (CategoryService) ServiceFactory
+				.getServiceImpl("CategoryService");
+		List<News_Category> list = service.getList();
 		// 把集合放进作用域
 		request.setAttribute("categorys", list);
 		// 转发到add.jsp

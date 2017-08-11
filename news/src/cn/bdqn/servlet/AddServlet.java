@@ -19,7 +19,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import cn.bdqn.bean.News_Detail;
 import cn.bdqn.service.NewsDetailService;
-import cn.bdqn.service.impl.NewsDetailServiceImpl;
+import cn.bdqn.service.ServiceFactory;
 
 /**
  * 文件新增   ===》上传
@@ -138,7 +138,8 @@ public class AddServlet extends HttpServlet {
 					}
 				}
 
-				NewsDetailService service = new NewsDetailServiceImpl();
+				NewsDetailService service = (NewsDetailService) ServiceFactory
+						.getServiceImpl("NewsDetailService");
 				int num = service.add(detail);
 				if (num > 0) { // 新增成功
 					resp.sendRedirect("listServlet");

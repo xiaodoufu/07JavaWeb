@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.bdqn.bean.News_Detail;
 import cn.bdqn.service.NewsDetailService;
-import cn.bdqn.service.impl.NewsDetailServiceImpl;
+import cn.bdqn.service.ServiceFactory;
 import cn.bdqn.util.PageUtil;
 
 /**
@@ -29,7 +29,9 @@ public class ListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 调用service层获取所有新闻列表的方法
-		NewsDetailService s = new NewsDetailServiceImpl();
+
+		NewsDetailService s = (NewsDetailService) ServiceFactory
+				.getServiceImpl("NewsDetailService");
 		// List<News_Detail> details = s.findAllNewsDetail(); 显示所有新闻
 
 		/**
@@ -50,11 +52,11 @@ public class ListServlet extends HttpServlet {
 			util.setPageIndex(1);
 		}
 		// 给总记录数赋值 的同时 也给 总页数 赋值了
-		int totalCount = s.getTotalCounts();// 总记录数赋值
+		int totalCount = s.findPageCounts();// 总记录数赋值
 		util.setTotalCount(totalCount);
 
 		// 分页显示 新闻信息
-		List<News_Detail> details = s.getNewsByPage(util);
+		List<News_Detail> details = s.findPageList(util);
 		if (details != null) {
 			// 还是要把集合放进 作用域中 便于前台获取
 			request.setAttribute("details", details);

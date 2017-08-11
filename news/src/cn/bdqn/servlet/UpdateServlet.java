@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.bdqn.bean.News_Detail;
 import cn.bdqn.service.NewsDetailService;
-import cn.bdqn.service.impl.NewsDetailServiceImpl;
+import cn.bdqn.service.ServiceFactory;
 
 /**
  * 真正的修改操作
@@ -27,8 +27,9 @@ public class UpdateServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// 解决post乱码问题
 		request.setCharacterEncoding("utf-8");
-		NewsDetailService service = new NewsDetailServiceImpl();
 
+		NewsDetailService service = (NewsDetailService) ServiceFactory
+				.getServiceImpl("NewsDetailService");
 		// 获取a标签传递过来的 id
 		String id = request.getParameter("id");
 		// 创建一个新闻对象
@@ -43,8 +44,8 @@ public class UpdateServlet extends HttpServlet {
 		detail.setId(Integer.parseInt(id));
 		// 获取修改时间
 
-		boolean flag = service.updateById(detail);
-		if (flag) { // 修改成功
+		int flag = service.update(detail);
+		if (flag > 0) { // 修改成功
 			response.sendRedirect("listServlet");
 		} else {
 			response.sendRedirect("update.jsp");

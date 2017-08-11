@@ -3,23 +3,23 @@ package cn.bdqn.service.impl;
 import java.io.Serializable;
 import java.util.List;
 
-import cn.bdqn.bean.News_Detail;
+import cn.bdqn.bean.News_Category;
+import cn.bdqn.dao.CategoryDao;
 import cn.bdqn.dao.DaoFactory;
-import cn.bdqn.dao.NewsDetailDao;
-import cn.bdqn.service.NewsDetailService;
+import cn.bdqn.service.CategoryService;
 import cn.bdqn.util.PageUtil;
 
-public class NewsDetailServiceImpl implements NewsDetailService {
+public class CategoryServiceImpl implements CategoryService {
 
-	private NewsDetailDao dao;
+	private CategoryDao dao;
 
-	public NewsDetailServiceImpl() {
+	public CategoryServiceImpl() {
 		// 实例化需要的dao层对象
-		dao = (NewsDetailDao) DaoFactory.getDaoImpl("NewsDetailDao");
+		dao = (CategoryDao) DaoFactory.getDaoImpl("CategoryDao");
 	}
 
 	@Override
-	public List<News_Detail> getList() {
+	public List<News_Category> getList() {
 		return dao.getList();
 	}
 
@@ -29,7 +29,7 @@ public class NewsDetailServiceImpl implements NewsDetailService {
 	}
 
 	@Override
-	public int update(News_Detail t) {
+	public int update(News_Category t) {
 		return dao.update(t);
 	}
 
@@ -39,18 +39,17 @@ public class NewsDetailServiceImpl implements NewsDetailService {
 	}
 
 	@Override
-	public List<News_Detail> findPageList(PageUtil util) {
+	public List<News_Category> findPageList(PageUtil util) {
 		return dao.findPageList(util);
 	}
 
 	@Override
-	public News_Detail findById(Serializable id) {
+	public News_Category findById(Serializable id) {
 		return dao.findById(id);
 	}
 
 	@Override
-	public int add(News_Detail t) {
+	public int add(News_Category t) {
 		return dao.add(t);
 	}
-
 }
