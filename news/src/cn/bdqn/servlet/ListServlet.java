@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.bdqn.bean.News_Detail;
-import cn.bdqn.service.NewsDetailService;
 import cn.bdqn.service.ServiceFactory;
+import cn.bdqn.service.newsdetail.NewsDetailService;
 import cn.bdqn.util.PageUtil;
 
 /**

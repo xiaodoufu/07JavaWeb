@@ -18,8 +18,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import cn.bdqn.bean.News_Detail;
-import cn.bdqn.service.NewsDetailService;
 import cn.bdqn.service.ServiceFactory;
+import cn.bdqn.service.newsdetail.NewsDetailService;
 
 /**
  * 文件新增   ===》上传

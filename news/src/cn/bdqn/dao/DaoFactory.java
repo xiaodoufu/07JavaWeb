@@ -1,7 +1,7 @@
 package cn.bdqn.dao;
 
-import cn.bdqn.dao.impl.CategoryDaoImpl;
-import cn.bdqn.dao.impl.NewsDetailDaoImpl;
+import cn.bdqn.dao.impl.category.CategoryDaoImpl;
+import cn.bdqn.dao.impl.newsdetail.NewsDetailDaoImpl;
 
 /**
  * DaoFactoryµ¥Àý

@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cn.bdqn.service.NewsDetailService;
 import cn.bdqn.service.ServiceFactory;
+import cn.bdqn.service.newsdetail.NewsDetailService;
 
 /**
    01.获取上一个页面的请求

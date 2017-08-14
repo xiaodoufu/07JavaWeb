@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.bdqn.bean.News_User;
-import cn.bdqn.service.UserService;
-import cn.bdqn.service.impl.UserServiceImpl;
+import cn.bdqn.service.impl.user.UserServiceImpl;
+import cn.bdqn.service.user.UserService;
 
 /**
  * ´¦ÀíµÇÂ¼µÄ  servlet

@@ -1,8 +1,8 @@
 package cn.bdqn.service;
 
 import cn.bdqn.dao.DaoFactory;
-import cn.bdqn.service.impl.CategoryServiceImpl;
-import cn.bdqn.service.impl.NewsDetailServiceImpl;
+import cn.bdqn.service.impl.category.CategoryServiceImpl;
+import cn.bdqn.service.impl.newsdetail.NewsDetailServiceImpl;
 
 public class ServiceFactory { // µ¥Àý
 

@@ -8,8 +8,8 @@ import java.util.Date;
  *
  */
 public class News_Detail {
-	private Integer id; // 新闻编号
-	private Integer categoryId; // 新闻类别id
+	private int id; // 新闻编号
+	private int categoryId; // 新闻类别id
 	private String title; // 新闻标题
 	private String summary; // 新闻摘要
 	private String content; // 新闻内容
@@ -18,19 +18,19 @@ public class News_Detail {
 	private Date createDate; // 创建时间
 	private Date modifyDate; // 修改时间
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public Integer getCategoryId() {
+	public int getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(Integer categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -90,9 +90,9 @@ public class News_Detail {
 		this.modifyDate = modifyDate;
 	}
 
-	public News_Detail(Integer id, Integer categoryId, String title,
-			String summary, String content, String picPath, String author,
-			Date createDate, Date modifyDate) {
+	public News_Detail(int id, int categoryId, String title, String summary,
+			String content, String picPath, String author, Date createDate,
+			Date modifyDate) {
 		super();
 		this.id = id;
 		this.categoryId = categoryId;

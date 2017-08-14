@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.bdqn.bean.News_Category;
-import cn.bdqn.service.CategoryService;
 import cn.bdqn.service.ServiceFactory;
+import cn.bdqn.service.category.CategoryService;
 
 /**
  * 获取所有新闻类型
