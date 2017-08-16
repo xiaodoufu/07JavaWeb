@@ -10,6 +10,11 @@
    <listener-class>cn.bdqn.sessionListener.User</listener-class>
   </listener>  -->
   
+  <listener>
+   <listener-class>cn.bdqn.servletContext.User</listener-class>
+  </listener> 
+  
+  
   
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
