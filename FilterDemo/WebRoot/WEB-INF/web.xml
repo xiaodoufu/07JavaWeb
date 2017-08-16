@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name></display-name>
+  
+  <!--  验证 过滤器的 执行 顺序
+  
+  
+  01.我们请求的时候  过滤器链的执行顺序 是按照
+     我们在 web.xml文件中的  filter-mapping的顺序执行
+  02.过滤器的加载时机，没有确切的顺序！
+    -->
+  
+ 
+  
+  <filter>
+    <filter-name>login</filter-name>
+    <filter-class>cn.bdqn.filter.LoginFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>Encoding</filter-name>
+    <filter-class>cn.bdqn.filter.EncodingFilter</filter-class>
+  </filter>
+  
+  
+  <filter-mapping>
+    <filter-name>Encoding</filter-name>
+     <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+   <filter-mapping>
+    <filter-name>login</filter-name>
+     <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
+  
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
