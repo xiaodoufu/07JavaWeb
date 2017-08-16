@@ -3,6 +3,7 @@ package cn.bdqn.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import cn.bdqn.service.user.UserService;
  *    001.比对成功，进入main.jsp
  *    002.失败，返回login.jsp
  */
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
 	@Override

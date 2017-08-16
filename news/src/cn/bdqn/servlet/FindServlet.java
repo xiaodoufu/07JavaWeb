@@ -3,6 +3,7 @@ package cn.bdqn.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import cn.bdqn.service.newsdetail.NewsDetailService;
 /**
  * 根据id获取指定的新闻信息
  */
+@WebServlet("/findByIdServlet")
 public class FindServlet extends HttpServlet {
 
 	@Override

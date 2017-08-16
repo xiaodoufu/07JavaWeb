@@ -45,4 +45,31 @@ public class ResultSetUtil {
 		return list;
 	}
 
+	/**
+	 * 
+	 * @param rs      从数据库获取的数据结果集
+	 * @param clazz   T类型
+	 * @return        T类型
+	 */
+	public static <T> T findT(ResultSet rs, Class<T> clazz) {
+		T object = null;
+		try {
+			if (rs.next()) {
+				object = clazz.newInstance(); // 实例化对象
+				Field[] field = clazz.getDeclaredFields(); // 获取实体类的所有属性，返回Field数组
+				for (Field f : field) {
+					f.setAccessible(true); // 可以访问私有属性 并赋值
+					f.set(object, rs.getObject(f.getName()));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return object;
+	}
+
 }

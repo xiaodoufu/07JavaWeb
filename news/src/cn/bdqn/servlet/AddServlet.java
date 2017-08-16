@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,6 +69,7 @@ import cn.bdqn.service.newsdetail.NewsDetailService;
  *      001.普通字段  使用 getFieldName()  和getString() 来获取字段名和字段值
  *      002.文件   使用getInputStream  getName  getOutputStream
  */
+@WebServlet("/addServlet")
 public class AddServlet extends HttpServlet {
 
 	@Override

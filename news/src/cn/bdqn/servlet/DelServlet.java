@@ -3,6 +3,7 @@ package cn.bdqn.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import cn.bdqn.service.newsdetail.NewsDetailService;
    02.调用service代码
    03.拿到结果 返回界面
  */
+@WebServlet("/delServlet")
 public class DelServlet extends HttpServlet {
 
 	@Override

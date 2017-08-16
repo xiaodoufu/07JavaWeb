@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import cn.bdqn.util.PageUtil;
  * 在进入main.jsp之前 必须获取的  所有新闻信息
  * 
  */
+@WebServlet("/listServlet")
 public class ListServlet extends HttpServlet {
 
 	@Override
