@@ -1,6 +1,6 @@
 01.下载Memcached安装包并解压到系统的某个位置
 02.配置环境变量  在path属性之中 新增刚才安装的位置
-03.memcached -d install  安装
+03.win+r 打开cmd 输入memcached -d install    安装
 04.win+r 打开cmd 输入service.msc   找到 memcached启动即可
 
 
