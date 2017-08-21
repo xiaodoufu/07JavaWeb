@@ -29,6 +29,5 @@ public class UserTest {
 		} else {
 			System.out.println("µÇÂ¼Ê§°Ü");
 		}
-
 	}
 }
