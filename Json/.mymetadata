@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Json"
+  id="myeclipse.1503284813706"
+  context-root="/Json"
+  j2ee-spec="6.0"
+  archive="Json.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
