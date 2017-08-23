@@ -2,6 +2,8 @@ package cn.bdqn.bean;
 
 import java.util.Date;
 
+import cn.bdqn.util.PageUtil;
+
 /**
  * 新闻详情的实体类
  * @author 小豆腐
@@ -17,6 +19,16 @@ public class News_Detail {
 	private String author; // 新闻发表者
 	private Date createDate; // 创建时间
 	private Date modifyDate; // 修改时间
+
+	private PageUtil pageUtil; // 分页需要的
+
+	public PageUtil getPageUtil() {
+		return pageUtil;
+	}
+
+	public void setPageUtil(PageUtil pageUtil) {
+		this.pageUtil = pageUtil;
+	}
 
 	public int getId() {
 		return id;
@@ -92,7 +104,7 @@ public class News_Detail {
 
 	public News_Detail(int id, int categoryId, String title, String summary,
 			String content, String picPath, String author, Date createDate,
-			Date modifyDate) {
+			Date modifyDate, PageUtil pageUtil) {
 		super();
 		this.id = id;
 		this.categoryId = categoryId;
@@ -103,6 +115,7 @@ public class News_Detail {
 		this.author = author;
 		this.createDate = createDate;
 		this.modifyDate = modifyDate;
+		this.pageUtil = pageUtil;
 	}
 
 	public News_Detail() {

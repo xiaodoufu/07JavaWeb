@@ -27,14 +27,12 @@ public class LoginFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		// 解决post请求乱码问题
 		request.setCharacterEncoding("utf-8");
-		System.out.println("这是   loginFilter");
 		// 向下转型
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 
 		// 获取用户前台请求的路径
 		String path = req.getRequestURI();
-		System.out.println("getRequestURI===>" + path);
 		// 从session获取是否有用户
 		News_User user = (News_User) req.getSession().getAttribute("loginUser");
 

@@ -65,8 +65,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
 						</div>
 					</div>
+					<!--  去 datatable 是bootstrap的默认分页  我们使用自己的！-->
 					<div class="box-content">
-						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						<table class="table table-striped table-bordered bootstrap-datatable">
 						  <thead>
 							  <tr>
 								  <th>新闻编号</th>
@@ -77,34 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								  <th>操作</th>
 							  </tr>
 						  </thead>   
-						  <tbody>
-						  <!-- begin  forEach  -->
-				<c:forEach items="${details}" var="d">	  
-							<tr>
-								<td>${d.id}</td>
-								<td class="center">${d.title }</td>
-								<td class="center">${d.author }</td>
-								<td class="center">${d.summary }</td>
-								<td class="center">${d.createDate }</td>
-								<td class="center">
-								<!-- 因为我们直接去界面的话  不能获取 所有的新闻类型 所以 先去servlet中获取  之后再跳转到add.jsp -->
-									<a class="btn btn-success" href="FindCategoryServlet">
-										<i class="icon-zoom-in icon-white"></i>  
-										新增                                           
-									</a>
-									<!-- findById.jsp  根据id 查询指定新闻的详情 -->
-									<a class="btn btn-info" href="findByIdServlet?id=${d.id }">
-										<i class="icon-edit icon-white"></i>  
-										修改                                            
-									</a>
-									<a class="btn btn-danger" href="#" onClick="del('delServlet?id=${d.id }');">
-										<i class="icon-trash icon-white"></i> 
-										删除
-									</a>
-								</td>
-							</tr>
-						</c:forEach>	
-						<!-- end  forEach-->	
+						  <tbody id="tbody">
+							
 						  </tbody>
 					  </table>            
 					</div>
@@ -117,16 +92,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
    <nav aria-label="Page navigation">
 	  <ul class="pagination">
-	  
-	  <c:if test="${pageUtil.pageIndex>1}">
-	    <li><a href="javascript:newsPage(document.forms[0],1)">首页</a></li>
-	    <li><a href="javascript:newsPage(document.forms[0],${pageUtil.pageIndex-1})" >上一页</a></li>
-	  </c:if>  
-	  
-	    <c:if test="${pageUtil.pageIndex< pageUtil.pageCount}">
-	    <li><a href="javascript:newsPage(document.forms[0],${pageUtil.pageIndex+1})">下一页</a></li>
-	    <li><a href="javascript:newsPage(document.forms[0],${pageUtil.pageCount})">尾页</a></li>
-	     </c:if>  
+	    <li><a href="javascript:"    id="one">首页</a></li>
+	    <li><a href="javascript:"    id="back">上一页</a></li>
+	    <li><a href="javascript:"    id="next">下一页</a></li>
+	    <li><a href="javascript:"    id="last">尾页</a></li>
 	  </ul>
   </nav>
 
@@ -244,15 +213,96 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   window.location.href= $("#url").val();
 	  }
 	  
-	  //分页的请求
-	  function  newsPage(form,pageIndex){
-	  //获取form表中的name属性值是pageIndex的隐藏域
-	  form.pageIndex.value=pageIndex;
-	  form.submit();  //表单提交
-	  }
+	  /* Ajax分页 */
+      $(function(){
+          //分页的四要素
+          var  pageIndex="";  //当前页
+          var  pageSize="";//页大小
+          var  totalPageCount=""; //总页数
+          var  totalCountSize=""; //总记录数
+          
+          //用户第一次打开这个inde.jsp页面什么数据都没有！ 但是必须得有！！！访问后代数据库
+          pageInit(pageIndex); // 初始化数据
+          
+          function   pageInit(pageIndex){
+	          $("#one").show();
+	          $("#back").show();
+	          $("#next").show();
+	          $("#last").show();   //第一次显示 所有的 超链接
+          
+             //使用ajax访问servlet
+             $.ajax({
+               url:"listServlet",
+               type:"POST",
+               data:{"pageIndex":pageIndex},  //把用户传递的当前页 发送给后台servlet
+               dataType:"json",
+               contentType:"application/x-www-form-urlencoded;charset=utf-8",
+               success:callBack  //调用回调函数
+             }); 
+           } 
+          
+          function  callBack(data){//data 就是 后台传递过来的数据
+              //每次都需要清空上次的内容
+              $("#tbody").html("");
+              
+              $(data).each(function(){   //  each   start
+                if (this.pageUtil!=null) {  //给分页四要素赋值
+					pageIndex=this.pageUtil.pageIndex;
+					pageSize=this.pageUtil.pageSize;
+					totalPageCount=this.pageUtil.pageCount;
+					totalCountSize=this.pageUtil.totalCount;
+				}
+				/*开始给tbody拼接 
+				01.选择之前的代码   ctrl+f  把所有的双引号换成单引号
+				02.  使用快捷键 shift+alt +a   给每一行增加  "   +
+				03. ctrl+f  替换所有的{ }
+				*/
+				$("#tbody").append("<tr><td>"+this.id+"</td>                                                                     "
+								+"<td class='center'>"+this.title +"</td>                                                      "
+								+"<td class='center'>"+this.author +"</td>                                                     "
+								+"<td class='center'>"+this.summary +"</td>                                                    "
+								+"<td class='center'>"+this.createDate +"</td>                                                 "
+								+"<td class='center'>                                                                      "
+								+"<!-- 因为我们直接去界面的话  不能获取 所有的新闻类型 所以 先去servlet中获取  之后再跳转到add.jsp -->                        "
+								+"	<a class='btn btn-success' href='FindCategoryServlet'>                                 "
+								+"		<i class='icon-zoom-in icon-white'></i>新增</a>                                      "
+								+"	<!-- findById.jsp  根据id 查询指定新闻的详情 -->                                                  "
+								+"	<a class='btn btn-info' href='findByIdServlet?id="+this.id +"'>                            "
+								+"		<i class='icon-edit icon-white'></i>修改</a>                                         "
+								+"	<a class='btn btn-danger' href='#' onClick='del('delServlet?id="+this.id +"');'>           "
+								+"		<i class='icon-trash icon-white'></i>删除</a></td></tr>                              ");
+               });  
+          }
+          
+          
+           
+             $("#one").click(function(){  //首页
+               pageInit(1);
+             });
+             $("#last").click(function(){  //尾页
+               pageInit(totalPageCount);
+             });
+             $("#back").click(function(){  //上一页
+                 if((pageIndex-1)>0){
+                    pageInit(pageIndex-1);
+                 }else{
+                    $("#one").hide();
+                    $("#back").hide();
+                 }
+               
+             });
+             $("#next").click(function(){  //下一页
+               if((pageIndex+1)<=totalPageCount){
+                    pageInit(pageIndex+1);
+                 }else{
+                    $("#last").hide();
+                    $("#next").hide();
+                 }
+             });
+      });
+    
+    </script>
 	  
-	  
-	  </script>
 	
   </body>
 </html>

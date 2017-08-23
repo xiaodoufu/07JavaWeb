@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 		} else { // 用户登录成功进入主界面
 			// 通过请求获取session
 			request.getSession().setAttribute("loginUser", user); // 将用户的信息放入session作用域中
-			response.sendRedirect("listServlet");// 重定向又去web.xml文件中查询url-parttern
+			response.sendRedirect("main.jsp");// 重定向又去web.xml文件中查询url-parttern
 		}
 
 	}

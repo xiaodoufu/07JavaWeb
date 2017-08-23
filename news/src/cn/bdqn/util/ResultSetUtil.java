@@ -31,6 +31,9 @@ public class ResultSetUtil {
 				Field[] field = clazz.getDeclaredFields(); // 获取实体类的所有属性，返回Field数组
 				for (Field f : field) {
 					f.setAccessible(true); // 可以访问私有属性 并赋值
+					if (f.getName().equals("pageUtil")) {
+						continue;
+					}
 					f.set(object, rs.getObject(f.getName()));
 				}
 				list.add(object); // 放进集合
